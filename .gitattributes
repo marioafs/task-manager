@@ -1,0 +1,28 @@
+# Maven wrapper
+**/mvnw text eol=lf
+**/*.cmd text eol=crlf
+
+# General text files
+* text=auto
+
+# Source files
+*.java text
+*.xml text
+*.yaml text
+*.yml text
+*.json text
+*.md text
+*.properties text
+
+# Frontend files
+*.js text
+*.ts text
+*.css text
+*.html text
+
+# Images and binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
