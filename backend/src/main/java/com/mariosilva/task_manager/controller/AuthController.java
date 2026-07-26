@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mariosilva.task_manager.document.User;
+import com.mariosilva.task_manager.dto.AuthResponseDTO;
+import com.mariosilva.task_manager.dto.LoginRequestDTO;
 import com.mariosilva.task_manager.dto.RegisterRequestDTO;
 import com.mariosilva.task_manager.dto.UserResponseDTO;
+import com.mariosilva.task_manager.service.AuthService;
 import com.mariosilva.task_manager.service.UserService;
 
 import jakarta.validation.Valid;
@@ -24,9 +27,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class AuthController {
 
     private UserService userService;
+    private final AuthService authService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
     @PostMapping("/register")
@@ -40,6 +45,12 @@ public class AuthController {
         UserResponseDTO createdUser = userService.createUser(registerRequestDTO);
         return ResponseEntity.status(201).body(createdUser);
     
+    }
+
+    @PostMapping("/login")
+    public AuthResponseDTO login(@Valid @RequestBody LoginRequestDTO request) {
+
+        return authService.login(request);
     }
     
     

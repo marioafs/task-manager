@@ -32,10 +32,10 @@ public class UserController {
         this.userService = userService;
     }
     
-    @GetMapping
+    /* @GetMapping
     public ResponseEntity<List<UserResponseDTO>> getUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
-    }
+    } */
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable String id) {
