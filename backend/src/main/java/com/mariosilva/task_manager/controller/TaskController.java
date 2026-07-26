@@ -19,7 +19,7 @@ import com.mariosilva.task_manager.document.Task;
 import com.mariosilva.task_manager.service.TaskService;
 
 @RestController
-@RequestMapping("/api/task")
+@RequestMapping("/api/tasks")
 @CrossOrigin(origins = "'*'")
 public class TaskController {
 

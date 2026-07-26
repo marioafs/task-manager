@@ -22,7 +22,7 @@ import com.mariosilva.task_manager.repository.UserRepository;
 import com.mariosilva.task_manager.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 @CrossOrigin(origins = "'*'")
 public class UserController {
 
@@ -51,25 +51,11 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    /* @PostMapping
     public UserResponseDTO postUser(@RequestBody User user) {
 
         return userService.createUser(user);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable String id, @RequestBody User userDetails) {
-        return userService.updateUser(id, userDetails)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> patchUser(@PathVariable String id, @RequestBody User userDetails) {
-        return userService.patchUser(id, userDetails)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+    } */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable String id) {
