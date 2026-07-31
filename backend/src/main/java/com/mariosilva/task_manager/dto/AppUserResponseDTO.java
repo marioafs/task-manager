@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserResponseDTO {
+public class AppUserResponseDTO {
     private String id;
-
-    private String username;
 
     private String email;
 

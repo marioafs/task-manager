@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.List;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ import com.mariosilva.task_manager.enums.TaskStatus;
 @Setter
 @NoArgsConstructor
 @Document(collection = "tasks")
+@EqualsAndHashCode(of = "id")
 public class Task {
     @Id
     private String id;

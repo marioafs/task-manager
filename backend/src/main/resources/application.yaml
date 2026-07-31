@@ -4,3 +4,15 @@ spring:
   
   mongodb:
     uri: mongodb://localhost:27017/task_manager
+
+  data:
+    mongodb:
+      auto-index-creation: true
+
+jwt:
+  secret: "r8Qv7mL2xK9pW4sT6nH3zY5cB1dF0aE7uI9oP6qR2wX8vS4"
+  expiration: 86400000
+
+# logging:
+#   level:
+#     org.springframework.security: TRACE

@@ -8,43 +8,45 @@ import java.time.LocalDateTime;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mariosilva.task_manager.document.User;
+import com.mariosilva.task_manager.document.AppUser;
 import com.mariosilva.task_manager.dto.RegisterRequestDTO;
-import com.mariosilva.task_manager.dto.UserResponseDTO;
-import com.mariosilva.task_manager.repository.UserRepository;
+import com.mariosilva.task_manager.dto.AppUserResponseDTO;
+import com.mariosilva.task_manager.enums.UserRole;
+import com.mariosilva.task_manager.repository.AppUserRepository;
 
 @Service
-public class UserService {
+public class AppUserService {
     
-    private final UserRepository userRepository;
+    private final AppUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AppUserService(AppUserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<UserResponseDTO> getAllUsers() {
-        List<UserResponseDTO> users = new ArrayList<>();
-        for (User user : userRepository.findAll()) {
+    public List<AppUserResponseDTO> getAllUsers() {
+        List<AppUserResponseDTO> users = new ArrayList<>();
+        for (AppUser user : userRepository.findAll()) {
             users.add(convertToUserResponseDTO(user));
         }
         return users;
     }
 
-    public Optional<UserResponseDTO> getUserById(String id) {
+    public Optional<AppUserResponseDTO> getUserById(String id) {
         return userRepository.findById(id).map(this::convertToUserResponseDTO);
     }
 
-    public Optional<UserResponseDTO> getUserByEmail(String email) {
+    public Optional<AppUserResponseDTO> getUserByEmail(String email) {
         return userRepository.findByEmail(email).map(this::convertToUserResponseDTO);
     }
 
-    public UserResponseDTO createUser(RegisterRequestDTO registerRequestDTO) {
-        User user = registerRequestDTOToUser(registerRequestDTO);
+    public AppUserResponseDTO createUser(RegisterRequestDTO registerRequestDTO) {
+        AppUser user = registerRequestDTOToUser(registerRequestDTO);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-        User savedUser = userRepository.save(user);
+        user.setRole(UserRole.USER);
+        AppUser savedUser = userRepository.save(user);
         return convertToUserResponseDTO(savedUser);
     }
 
@@ -57,13 +59,12 @@ public class UserService {
         return false;
     }
 
-    private UserResponseDTO convertToUserResponseDTO(User user) {
+    private AppUserResponseDTO convertToUserResponseDTO(AppUser user) {
         if (user == null) {
             return null;
         }
-        UserResponseDTO dto = new UserResponseDTO();
+        AppUserResponseDTO dto = new AppUserResponseDTO();
         dto.setId(user.getId());
-        dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
@@ -72,12 +73,11 @@ public class UserService {
         return dto;
     }
 
-    private User registerRequestDTOToUser(RegisterRequestDTO registerRequestDTO) {
-        User user = new User();
+    private AppUser registerRequestDTOToUser(RegisterRequestDTO registerRequestDTO) {
+        AppUser user = new AppUser();
         user.setFirstName(registerRequestDTO.getFirstName());
         user.setLastName(registerRequestDTO.getLastName());
         user.setEmail(registerRequestDTO.getEmail());
-        user.setUsername(registerRequestDTO.getUsername());
         
         String hashedPassword = passwordEncoder.encode(
             registerRequestDTO.getPassword()
