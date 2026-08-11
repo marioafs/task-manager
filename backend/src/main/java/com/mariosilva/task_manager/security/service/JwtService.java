@@ -43,7 +43,7 @@ public class JwtService {
      * @param token the JWT string to verify (without the "Bearer " prefix)
      * @return an {@link Optional} containing the email if valid; {@link Optional#empty()} otherwise
      */
-    public Optional<String> extractEmail(String token) {
+    public Optional<String> validateAndExtractEmail(String token) {
 
         try {
             String email = JWT.require(algorithm)

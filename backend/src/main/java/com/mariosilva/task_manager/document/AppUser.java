@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @NoArgsConstructor
-@Document(collection = "users")
+@Document(collection = "app_users")
 @EqualsAndHashCode(of = "id")
 public class AppUser {
     @Id
