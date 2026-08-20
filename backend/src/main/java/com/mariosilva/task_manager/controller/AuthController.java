@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mariosilva.task_manager.document.AppUser;
 import com.mariosilva.task_manager.dto.AuthResponseDTO;
 import com.mariosilva.task_manager.dto.LoginRequestDTO;
 import com.mariosilva.task_manager.dto.RegisterRequestDTO;

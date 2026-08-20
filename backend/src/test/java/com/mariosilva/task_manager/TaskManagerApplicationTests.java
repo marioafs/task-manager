@@ -1,13 +1,13 @@
 package com.mariosilva.task_manager;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class TaskManagerApplicationTests {
+import com.mariosilva.task_manager.config.IntegrationTestWithTestcontainer;
 
-	@Test
-	void contextLoads() {
-	}
 
+class TaskManagerApplicationTests extends IntegrationTestWithTestcontainer{
+
+    @Test
+    void contextLoads() {
+    }
 }
