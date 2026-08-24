@@ -44,13 +44,25 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/users/me").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/api/users/me").authenticated()
 
-                // Admin
+                // Admin - Users
                 .requestMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/users/email").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/users/{id}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/users/{id}").hasRole("ADMIN")
 
-                // All Authenticted
+                // Authenticated - Tasks
+                .requestMatchers(HttpMethod.GET, "/api/tasks/me").authenticated()
+                .requestMatchers(HttpMethod.POST, "/api/tasks").authenticated()
+                .requestMatchers(HttpMethod.GET, "/api/tasks/{id}").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/api/tasks/{id}").authenticated()
+                .requestMatchers(HttpMethod.PATCH, "/api/tasks/{id}").authenticated()
+                .requestMatchers(HttpMethod.DELETE, "/api/tasks/{id}").authenticated()
+
+                // Admin - Tasks
+                .requestMatchers(HttpMethod.GET, "/api/tasks").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/tasks/user/{userId}").hasRole("ADMIN")
+
+                // All Authenticated
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
